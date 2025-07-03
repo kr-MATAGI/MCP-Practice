@@ -63,76 +63,76 @@ class MCPClient:
             ClientSession(self.stdio, self.write)
         )
 
-        await self.session.initialize()
+        await self.session.initialize()  # Raise Error !
 
         # List available tools
         response = await self.session.list_tools()
         tools = response.tools
         print(f"Available tools: {(', '.join([tool.name for tool in tools]))}")
 
-        async def process_query(
-            self,
-            query: str,
-        ) -> str:
-            """
-            Process a query using Claude and available tools
-            """
-            messages = [{"role": "user", "content": query}]
+    async def process_query(
+        self,
+        query: str,
+    ) -> str:
+        """
+        Process a query using Claude and available tools
+        """
+        messages = [{"role": "user", "content": query}]
 
-            response = await self.session.list_tools()
-            available_tools = [
-                {
-                    "name": tool.name,
-                    "description": tool.description,
-                    "input_schema": tool.inputSchema,
-                }
-                for tool in response.tools
-            ]
+        response = await self.session.list_tools()
+        available_tools = [
+            {
+                "name": tool.name,
+                "description": tool.description,
+                "input_schema": tool.inputSchema,
+            }
+            for tool in response.tools
+        ]
 
-            # Process response and handle tools calls
-            final_text = []
+        # Process response and handle tools calls
+        final_text = []
 
-            assistant_message_content = []
-            for content in response.content:
-                if "text" == content.type:
-                    final_text.append(content.text)
-                elif "tool_use" == content.type:
-                    tool_name = content.name
-                    tool_args = content.input
+        assistant_message_content = []
+        for content in response.content:
+            if "text" == content.type:
+                final_text.append(content.text)
+            elif "tool_use" == content.type:
+                tool_name = content.name
+                tool_args = content.input
 
-                    # Execute tool call
-                    result = await self.session.call_tool(tool_name, tool_args)
-                    final_text.append(f"Calling tool {tool_name} with args {tool_args}")
+                # Execute tool call
+                result = await self.session.call_tool(tool_name, tool_args)
+                final_text.append(f"Calling tool {tool_name} with args {tool_args}")
 
-                    assistant_message_content.append(content)
-                    messages.append(
-                        {
-                            "role": "assistant",
-                            "content": assistant_message_content,
-                        }
-                    )
-                    messages.append(
-                        {
-                            "role": "user",
-                            "content": [
-                                {
-                                    "type": "tool_result",
-                                    "tool_use_id": content.id,
-                                    "content": result.content,
-                                }
-                            ],
-                        }
-                    )
+                assistant_message_content.append(content)
+                messages.append(
+                    {
+                        "role": "assistant",
+                        "content": assistant_message_content,
+                    }
+                )
+                messages.append(
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "tool_result",
+                                "tool_use_id": content.id,
+                                "content": result.content,
+                            }
+                        ],
+                    }
+                )
 
-                    # Get next response from Claude
-                    response = self.anthropic.messages.create(
-                        model="claude-3-5-sonnet-20241022",
-                        max_tokens=1000,
-                        messages=messages,
-                        tools=available_tools,
-                    )
+                # Get next response from Claude
+                response = self.anthropic.messages.create(
+                    model="claude-3-5-sonnet-20241022",
+                    max_tokens=1000,
+                    messages=messages,
+                    tools=available_tools,
+                )
 
-                    final_text.append(response.content[0].text)
+                final_text.append(response.content[0].text)
 
     # 대화형 채팅 인터페이스
     async def chat_loop(self):
@@ -176,6 +176,7 @@ async def main():
 
     except Exception as e:
         print(f"[ERROR] {str(e)}")
+
     finally:
         await client.cleanup()
 
