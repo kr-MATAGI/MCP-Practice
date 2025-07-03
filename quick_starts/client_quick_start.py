@@ -141,3 +141,23 @@ class MCPClient:
 
         print("\nMCP Client Started!")
         print("Type your queries or 'quit' to exit.")
+
+        while True:
+            try:
+                query = input("\nQuery: ").strip()
+
+                if "quit" == query.lower():
+                    print("Exiting...")
+                    break
+
+                response = await self.process_query(query)
+                print(f"\n {response}")
+
+            except Exception as e:
+                print(f"[ERROR] {str(e)}")
+
+    async def cleanup(self):
+        """
+        Clean up resources
+        """
+        await self.exit_stack.aclose()
