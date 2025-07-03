@@ -1,0 +1,8 @@
+# IDE
+ 
+
+
+ # ENV
+venv/
+.env
+.env.*
