@@ -1,3 +1,4 @@
+import sys
 import asyncio
 from typing import Optional
 
@@ -154,10 +155,31 @@ class MCPClient:
                 print(f"\n {response}")
 
             except Exception as e:
-                print(f"[ERROR] {str(e)}")
+                raise e
 
     async def cleanup(self):
         """
         Clean up resources
         """
         await self.exit_stack.aclose()
+
+
+async def main():
+    if len(sys.argv) < 2:
+        print("Usage: python client.py <path_to_server_script>")
+        sys.exit()
+
+    client = MCPClient()
+    try:
+        await client.connect_to_server(sys.argv[1])
+        await client.chat_loop()
+
+    except Exception as e:
+        print(f"[ERROR] {str(e)}")
+    finally:
+        await client.cleanup()
+
+
+### MAIN
+if "__main__" == __name__:
+    asyncio.run(main())
