@@ -1,3 +1,8 @@
-# MCP-Practice
+## Concepts of MCP
+### Overview
 
-MCP Practice (Git push Test)
+
+### Participants
+- 
+
+### Layers
