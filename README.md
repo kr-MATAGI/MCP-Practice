@@ -43,7 +43,7 @@
     - JSON-RPC 기반의 Client-Server 통신 프로토콜을 정의
     - 주요 기능
       - 연결 수명 주기 관리 (lifecycle management)
-        - **MCP는 상태를 유지하는 프로토콜(Stateful Protocol)**이다.
+        - **MCP는 상태를 유지하는 프로토콜(Stateful Protocol)** 이다.
         - 클라이언트-서버 간 연결 초기화
         - 기능 협상 (capability negotiation)
         - 연결 종료 처리
