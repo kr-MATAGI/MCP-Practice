@@ -87,4 +87,27 @@
 <img width="417" height="141" alt="image" src="https://github.com/user-attachments/assets/8f5a76d3-1992-44a6-8eb8-1c7e8dac1def" />
 </p>
 
+- MCP 서버가 제공하는 핵심 기본요소
+  <p align="left">
+    <img width="555" height="162" alt="image" src="https://github.com/user-attachments/assets/bd2fb908-4ba7-491d-b821-784865d4b79b" />
+  </p>
 
+- MCP 클라이언트가 제공할 수 있는 기본요소
+  <p align="left">
+    <img width="518" height="204" alt="image" src="https://github.com/user-attachments/assets/2fd8fe92-b5ff-494c-8348-9424bad9d950" />
+  </p>
+
+
+### Notifications
+- MCP는 실시간 알림 기능 지원
+- 서버와 클라이언트 간의 동적 업데이트를 가능하게 함
+
+- 사용 목적
+  - 서버에서 사용 가능한 tools 목록이 변경되었을 때<br>
+    서버는 클라이언트에게 변경 사항을 즉시 알릴 수 있음
+  - 클라이언트는 이에 따라 UI를 업데이트하거나, 새로운 동작을 지원
+ 
+- 전송 방식
+  - JSON-RPC 2.0의 Notification 메시지 형식으로 전송됨
+  - 응답을 기대하지 않는 단방향 메시지 (request와 다름)
+  - 서버 → 클라이언트 방향으로 비동기 이벤트 알림
