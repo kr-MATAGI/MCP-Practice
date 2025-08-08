@@ -1,8 +1,116 @@
-# IDE
- 
+# IDE 및 에디터
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
- # ENV
+# 가상환경
 venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# 환경 변수
 .env
 .env.*
+.env.local
+.env.development
+.env.test
+.env.production
+
+# 로그 파일
+*.log
+logs/
+
+# 데이터베이스
+*.db
+*.sqlite
+*.sqlite3
+test.db
+
+# 캐시 및 임시 파일
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# uv
+uv.lock
+
+# Node.js (MCP 서버에서 사용할 수 있음)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# 운영체제
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# MCP 관련
+*.mcp
+mcp_config.json
+
+# 테스트 관련
+test_results/
+test_output/
+
+# 임시 파일
+*.tmp
+*.temp
+cb79afe08c08653458db6f5ebecb3435
